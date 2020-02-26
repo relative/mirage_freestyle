@@ -1,0 +1,36 @@
+<% if (banners.length > 0) { %> <% banners.map(banner => { %>
+<div class="banner <%= banner.class %>">
+  <p class="content">
+    <%- banner.message %>
+  </p>
+</div>
+<% }) %> <% } %>
+<section class="section">
+  <div class="container">
+    <div class="c">
+      <div class="w">
+        <div class="box">
+          <h1 class="title">Login</h1>
+          <h2 class="subtitle">Freestyle</h2>
+          <p class="content">
+            <a href="/oauth/login/mirage">Login with Mirage</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  html,
+  body,
+  .section,
+  .section .container {
+    height: 100%;
+  }
+  .c {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+</style>

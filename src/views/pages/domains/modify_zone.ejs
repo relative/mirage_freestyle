@@ -1,0 +1,96 @@
+<section class="section">
+  <div class="container">
+    <h1 class="title"><%= zone.name %></h1>
+    <span class="is-size-7">
+      Abuse of the zone modification feature will result in demotion and your
+      account being banned.
+    </span>
+    <p><br /></p>
+
+    <div class="item">
+      <span class="is-size-7">status</span>
+      <%- getStatus(zone.status) %>
+    </div>
+    <div class="item">
+      <span class="is-size-7">zone id</span>
+      <code><%= zone.id %></code>
+    </div>
+    <div class="item">
+      <span class="is-size-7">domain</span>
+      <code><%= zone.name %></code>
+    </div>
+    <div class="item">
+      <span class="is-size-7">nameservers</span>
+      <code><%= zone.name_servers[0] %></code>
+      <code><%= zone.name_servers[1] %></code>
+    </div>
+    <div class="item">
+      <span class="is-size-7">registrar</span>
+      <code><%= zone.original_registrar || zone.registrar || 'n/a'%></code>
+    </div>
+    <br />
+
+    <span class="is-size-5">dns records</span>
+    <table class="table is-striped is-hoverable is-fullwidth">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Name</th>
+          <th>Content</th>
+          <th>CF Proxied</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% dns.map(record => { %>
+        <tr>
+          <td><%= record.type %></td>
+          <td><%= record.name %></td>
+          <td><%- mask(record.content) %></td>
+          <td>
+            <% if (record.proxied) { %>
+            <span class="has-text-success">YES</span>
+            <% } else { %> <span class="has-text-danger">NO</span>
+            <% } %>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+    <% if (unmodifiable) { %>
+    <p class="has-text-info">
+      You do not have permission to edit this zone.
+    </p>
+    <% } else { %>
+    <p class="has-text-danger is-size-3">
+      DO NOT CLICK THIS BUTTON UNLESS YOU ARE ABSOLUTELY SURE WHAT YOU ARE
+      DOING!!!
+    </p>
+    <p>
+      It will destructively replace the zone file for the domain with the
+      original Mirage DNS records
+    </p>
+    <p>
+      <a
+        href="/domains/modify/<%= zone.id %>/reset_mirage"
+        class="button is-danger"
+      >
+        Reset to Mirage DNS
+      </a>
+      <% if (profile.relative) { %>
+      <a href="/domains/modify/<%= zone.id %>/remove" class="button is-danger">
+        VERY DANGEROUS: REMOVE ZONE
+      </a>
+      <% } %>
+    </p>
+    <% } %>
+  </div>
+</section>
+
+<style>
+  .item {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+  }
+</style>

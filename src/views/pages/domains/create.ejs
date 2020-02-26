@@ -1,0 +1,41 @@
+<section class="section">
+  <div class="container">
+    <h1 class="title">Create a domain</h1>
+    <span class="is-size-7">
+      Abuse of the zone creation feature will result in demotion and your
+      account being banned.
+    </span>
+    <span class="is-size-7 has-text-danger">
+      Do not create domains you do not control, it will flood the cloudflare
+      account with useless zones and I will also ban you.
+    </span>
+    <p><br /></p>
+    <form method="POST">
+      <label class="label">Domain</label>
+
+      <div class="field is-horizontal">
+        <input
+          class="input"
+          type="text"
+          name="domain"
+          maxlength="253"
+          required
+          placeholder="example.com"
+        />
+        <button class="button is-primary">
+          <span class="icon">
+            <i class="fas fa-plus"></i>
+          </span>
+          <span>Create</span>
+        </button>
+      </div>
+      <div class="field"></div>
+    </form>
+  </div>
+</section>
+
+<style>
+  .input {
+    margin-right: 0.5rem;
+  }
+</style>

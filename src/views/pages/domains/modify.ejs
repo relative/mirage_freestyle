@@ -1,0 +1,45 @@
+<section class="section">
+  <div class="container">
+    <h1 class="title">Modify a Domain</h1>
+    <nav class="pagination is-small" role="navigation" aria-label="pagination">
+      <a class="pagination-previous" href="?page=<%= previousPage %>" <%if(intPage===1){%>disabled<%}%>>Previous</a>
+      <a class="pagination-next" href="?page=<%= nextPage %>" <%if(intPage===resultInfo.total_pages){%>disabled<%}%>>Next page</a>
+      <ul class="pagination-list">
+        <% for (let i = 1; i <= resultInfo.total_pages; i++) { %>
+        <li>
+          <a
+            class="pagination-link <% if(i.toString() === page){%>is-current<%}%>"
+            aria-label="Goto page <%= i %>"
+            href="?page=<%=i%>"
+            <% if(i.toString() === page){%>aria-current="page"<%}%>
+          >
+            <%= i %>
+          </a>
+        </li>
+        <% } %>
+      </ul>
+    </nav>
+    <table class="table is-striped is-hoverable is-fullwidth">
+      <thead>
+        <tr>
+          <th>Domain</th>
+          <th>CF Status</th>
+          <th>Modify</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% zones.map(zone => { %>
+        <tr>
+          <td><a href="/domains/modify/<%= zone.id %>"><%= zone.name %></a></td>
+          <td>
+            <%- getStatus(zone.status) %>
+          </td>
+          <td>
+            <a href="/domains/modify/<%= zone.id %>" class="has-text-warning"><i class="fas fa-edit"></i></a>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</section>
