@@ -9,7 +9,7 @@ module.exports = async (req, res, next) => {
     return res.redirect('/oauth/login')
   }
   const user = await getUser(req.session.token)
-  if (!user.admin) {
+  if (!user.admin || !req.moderator) {
     delete req.session.token
     req.flash(
       'is-danger',
